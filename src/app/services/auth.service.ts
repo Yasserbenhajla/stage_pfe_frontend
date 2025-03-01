@@ -15,7 +15,7 @@ export class AuthService {
 
 
     login(credentials: { email: string; password: string }): Observable<{ token: string; role: string }> {
-      return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/authenticate`, credentials).pipe(
+      return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/login`, credentials).pipe(
         tap(response => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);

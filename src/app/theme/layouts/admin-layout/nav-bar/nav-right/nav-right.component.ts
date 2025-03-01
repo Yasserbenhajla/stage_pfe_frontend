@@ -1,6 +1,6 @@
 // angular import
 import { Component, inject, input, output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 // project import
 
@@ -42,7 +42,7 @@ export class NavRightComponent {
   windowWidth: number;
   screenFull: boolean = true;
 
-  constructor() {
+  constructor(private router: Router) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -65,6 +65,11 @@ export class NavRightComponent {
         WalletOutline
       ]
     );
+  }
+  logout(): void {
+    localStorage.removeItem('token'); // Clear the token
+    localStorage.removeItem('role'); // Optional: Clear the role if stored
+    this.router.navigate(['/login']); // Redirect to login page
   }
 
   profile = [

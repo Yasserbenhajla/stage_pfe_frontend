@@ -23,10 +23,13 @@ export class AuthLoginComponent {
 
   login() {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
-      next: response => console.log('Login successful', response),
-      error: err => {
-        console.error('Login error', err);
-        // Optionally, display a user-friendly error message
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
+        console.log("Connexion réussie : ", response);
+      },
+      error: (error) => {
+        alert(error.error.message);
       }
     });
   }
